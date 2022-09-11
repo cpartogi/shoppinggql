@@ -1,0 +1,66 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+
+type Product {
+  product_id : ID!
+  sku : String!
+  product_name : String!
+  product_price : Float!
+  product_qty: Int!
+}
+
+type Customer {
+  customer_id : ID!
+  customer_name : String!
+  customer_email : String!
+}
+
+type Cart {
+  cart_id : ID!
+  customer_id : String!
+  product_id : String!
+  sku : String!
+  product_name : String!
+  unit_price : Float!
+  quantity : Int!
+  total_price : Float!
+  created_at : String!
+}
+
+type Order {
+  order_num : String!
+  customer_id : String!
+ }
+
+type OrderDetail {
+  order_id : ID!
+  order_num : String!
+  customer_id : String!
+  product_id : String!
+  sku : String!
+  product_name : String!
+  unit_price : Float!
+  quantity : Int!
+  total_price : Float!
+}
+
+type Query {
+  productList : [Product!]!
+  customerList : [Customer!]!
+  shoppingCart (customer_id: String!) : [Cart!]!
+  orderByCustomer (customer_id : String!) : [Order!]!
+  orderDetail (order_num : String!) : [OrderDetail!]!
+}
+
+type ResponseData {
+  status_code : Int!
+  message : String!
+}
+
+type Mutation {
+  addCart (customer_id:String!, product_id:String!, qty:Int!) : ResponseData!
+  deleteCart (customer_id:String!, product_id:String!) : ResponseData!
+  checkout (customer_id:String!) : ResponseData!
+}
